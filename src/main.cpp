@@ -13,8 +13,14 @@
  */
 void processGraph(const std::string& filename);
 
-int main(void) {
-    processGraph("graph.txt");
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        std::cerr << "Usage: " << argv[0] << " <filename>\n";
+        return 1;
+    }
+
+    std::string filename = argv[1];
+    processGraph(filename);
 
     return 0;
 }
@@ -27,8 +33,8 @@ void processGraph(const std::string& filename) {
     }
 
     int numVertices, numEdges;
-    input >> numVertices; 
-    input >> numEdges;    
+    input >> numVertices;
+    input >> numEdges;
 
     Graph g(numVertices);
 
@@ -39,7 +45,7 @@ void processGraph(const std::string& filename) {
     }
 
     int startVertex;
-    input >> startVertex; 
+    input >> startVertex;
 
     std::vector<int> distances = g.bfs(startVertex);
 
@@ -47,7 +53,5 @@ void processGraph(const std::string& filename) {
         std::cout << distances[i] << "\n";
     }
 
-    g.printGraph();
-
-    input.close(); 
+    input.close();
 }
